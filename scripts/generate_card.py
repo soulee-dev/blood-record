@@ -135,8 +135,8 @@ def generate_svg(data):
     bar_max = inner_w - 80
     value_x = inner_w - 30 + 10
 
-    digit_width = len(str(total)) * 36
-    total_suffix_x = cx + digit_width // 2 + 2
+    digit_width = len(str(total)) * 38
+    total_suffix_x = cx + digit_width // 2 + 6
 
     tier_label = tier["name"] if tier["name"] else "나의 헌혈 이야기"
 
