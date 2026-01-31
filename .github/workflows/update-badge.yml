@@ -1,0 +1,45 @@
+name: Update Blood Donation Card
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Crawl blood donation records
+        id: crawl
+        env:
+          BLOODINFO_ID: ${{ secrets.BLOODINFO_ID }}
+          BLOODINFO_PW: ${{ secrets.BLOODINFO_PW }}
+        run: |
+          result=$(python scripts/crawl.py)
+          echo "$result" > /tmp/blood_data.json
+
+      - name: Generate card
+        run: python scripts/generate_card.py < /tmp/blood_data.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/blood-card.svg
+          git diff --cached --quiet || git commit -m "Update blood donation card"
+          git push
