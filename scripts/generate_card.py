@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
+"""헌혈 기록 JSON을 읽어 헌혈 유공패 스타일 SVG 카드를 생성."""
 
 import io
 import json
 import sys
 from datetime import datetime, timezone, timedelta
+
+from font_data import PRETENDARD_REGULAR, PRETENDARD_BOLD, PRETENDARD_EXTRABOLD
 
 
 CARD_WIDTH = 380
@@ -11,8 +14,8 @@ CARD_HEIGHT = 580
 
 KST = timezone(timedelta(hours=9))
 
-# 횟수별 등급 테마 (ref.png 유공패 색상 기반)
-# (최소횟수, 등급명, 상단 그라디언트 시작, 상단 그라디언트 끝, 액센트색, 바 그라디언트 끝)
+FONT_FAMILY = "Pretendard"
+
 TIERS = [
     (300, "최고명예대장", "#1A1A2E", "#0F3460", "#E94560", "#E94560"),
     (200, "명예대장",     "#C41E3A", "#A01830", "#C41E3A", "#E85D75"),
@@ -26,17 +29,36 @@ TIERS = [
 def get_tier(total):
     for min_count, name, top1, top2, accent, bar_end in TIERS:
         if total >= min_count:
-            return {
-                "name": name,
-                "top1": top1, "top2": top2,
-                "accent": accent, "bar_end": bar_end,
-            }
+            return {"name": name, "top1": top1, "top2": top2,
+                    "accent": accent, "bar_end": bar_end}
     return TIERS[-1]
 
+
+def font_face_css():
+    return f"""
+    @font-face {{
+      font-family: '{FONT_FAMILY}';
+      font-weight: 400;
+      src: url('data:font/woff2;base64,{PRETENDARD_REGULAR}') format('woff2');
+    }}
+    @font-face {{
+      font-family: '{FONT_FAMILY}';
+      font-weight: 700;
+      src: url('data:font/woff2;base64,{PRETENDARD_BOLD}') format('woff2');
+    }}
+    @font-face {{
+      font-family: '{FONT_FAMILY}';
+      font-weight: 800;
+      src: url('data:font/woff2;base64,{PRETENDARD_EXTRABOLD}') format('woff2');
+    }}"""
+
+
+F = FONT_FAMILY
 
 SVG_TEMPLATE = """\
 <svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <defs>
+    <style>{font_css}</style>
     <linearGradient id="top-bg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:{top1}"/>
       <stop offset="100%" style="stop-color:{top2}"/>
@@ -54,54 +76,46 @@ SVG_TEMPLATE = """\
     </filter>
   </defs>
 
-  <!-- 카드 외곽 -->
   <rect x="10" y="10" width="{inner_w}" height="{inner_h}" rx="12" fill="url(#body-bg)" filter="url(#shadow)"/>
 
-  <!-- 상단 컬러 영역 -->
   <rect x="10" y="10" width="{inner_w}" height="160" rx="12" fill="url(#top-bg)"/>
   <rect x="10" y="100" width="{inner_w}" height="70" fill="url(#top-bg)"/>
 
-  <!-- 십자가 심볼 -->
   <rect x="{cross_cx_h}" y="38" width="60" height="20" rx="4" fill="#FFFFFF" opacity="0.9"/>
   <rect x="{cross_cx_v}" y="18" width="20" height="60" rx="4" fill="#FFFFFF" opacity="0.9"/>
 
-  <!-- 헌혈 기록 타이틀 -->
   <text x="{cx}" y="115" text-anchor="middle"
-        font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="13" font-weight="400"
+        font-family="'{f}', sans-serif" font-size="13" font-weight="400"
         fill="rgba(255,255,255,0.7)" letter-spacing="6">헌혈 기록</text>
   <text x="{cx}" y="155" text-anchor="middle"
-        font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="15"
+        font-family="'{f}', sans-serif" font-size="15"
         fill="rgba(255,255,255,0.6)" letter-spacing="2">{tier_label}</text>
 
-  <!-- 총 헌혈 횟수 -->
   <text x="{cx}" y="225" text-anchor="middle"
-        font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="14" font-weight="400"
+        font-family="'{f}', sans-serif" font-size="14" font-weight="400"
         fill="#888">총 헌혈 횟수</text>
   <text x="{cx}" y="280" text-anchor="middle"
-        font-family="'Segoe UI', 'Malgun Gothic', sans-serif" font-size="64" font-weight="800"
+        font-family="'{f}', sans-serif" font-size="64" font-weight="800"
         fill="{accent}">{total}</text>
   <text x="{total_suffix_x}" y="280" text-anchor="start"
-        font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="18" font-weight="400"
+        font-family="'{f}', sans-serif" font-size="18" font-weight="400"
         fill="{accent}">회</text>
 
-  <!-- 구분선 -->
   <line x1="50" y1="305" x2="{line_x2}" y2="305" stroke="#D6D0C8" stroke-width="1"/>
 
-  <!-- 종류별 내역 -->
 {bars}
 
-  <!-- 날짜 -->
   <line x1="50" y1="{footer_line_y}" x2="{line_x2}" y2="{footer_line_y}" stroke="#D6D0C8" stroke-width="1"/>
   <text x="{cx}" y="{footer_y}" text-anchor="middle"
-        font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="11"
+        font-family="'{f}', sans-serif" font-size="11"
         fill="#AAA">{date} 기준</text>
 </svg>"""
 
 BAR_TEMPLATE = """\
-  <text x="50" y="{label_y}" font-family="'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif"
+  <text x="50" y="{label_y}" font-family="'{f}', sans-serif"
         font-size="13" fill="#555">{label}</text>
   <text x="{value_x}" y="{label_y}" text-anchor="end"
-        font-family="'Segoe UI', 'Malgun Gothic', sans-serif" font-size="13" font-weight="700"
+        font-family="'{f}', sans-serif" font-size="13" font-weight="700"
         fill="#333">{count}회</text>
   <rect x="50" y="{bar_y}" width="{bar_max}" height="10" rx="5" fill="#E8E2DA"/>
   <rect x="50" y="{bar_y}" width="{fill_width}" height="10" rx="5" fill="url(#bar-fill)"/>"""
@@ -124,7 +138,6 @@ def generate_svg(data):
     digit_width = len(str(total)) * 36
     total_suffix_x = cx + digit_width // 2 + 2
 
-    # 등급명이 있으면 표시, 없으면 부제
     tier_label = tier["name"] if tier["name"] else "나의 헌혈 이야기"
 
     bars_parts = []
@@ -143,6 +156,7 @@ def generate_svg(data):
             fill_width=fill_width,
             count=count,
             value_x=value_x,
+            f=F,
         ))
 
     date_str = datetime.now(KST).strftime("%Y.%m.%d")
@@ -173,6 +187,8 @@ def generate_svg(data):
         top2=tier["top2"],
         accent=tier["accent"],
         bar_end=tier["bar_end"],
+        font_css=font_face_css(),
+        f=F,
     )
 
 
