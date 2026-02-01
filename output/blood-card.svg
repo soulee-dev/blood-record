@@ -17,16 +17,16 @@
       src: url('data:font/woff2;base64,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') format('woff2');
     }</style>
     <linearGradient id="top-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#1A1A2E"/>
-      <stop offset="100%" style="stop-color:#0F3460"/>
+      <stop offset="0%" style="stop-color:#8C8C8C"/>
+      <stop offset="100%" style="stop-color:#6B6B6B"/>
     </linearGradient>
     <linearGradient id="body-bg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#F8F6F3"/>
       <stop offset="100%" style="stop-color:#EEEAE4"/>
     </linearGradient>
     <linearGradient id="bar-fill" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#E94560"/>
-      <stop offset="100%" style="stop-color:#E94560"/>
+      <stop offset="0%" style="stop-color:#8C8C8C"/>
+      <stop offset="100%" style="stop-color:#AAAAAA"/>
     </linearGradient>
     <filter id="shadow" x="-5%" y="-3%" width="110%" height="110%">
       <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#00000022"/>
@@ -46,17 +46,17 @@
         fill="rgba(255,255,255,0.7)" letter-spacing="6">헌혈 기록</text>
   <text x="190" y="155" text-anchor="middle"
         font-family="'Pretendard', sans-serif" font-size="15"
-        fill="rgba(255,255,255,0.6)" letter-spacing="2">최고명예대장</text>
+        fill="rgba(255,255,255,0.6)" letter-spacing="2">은장</text>
 
   <text x="190" y="225" text-anchor="middle"
         font-family="'Pretendard', sans-serif" font-size="14" font-weight="400"
         fill="#888">총 헌혈 횟수</text>
   <text x="190" y="280" text-anchor="middle"
         font-family="'Pretendard', sans-serif" font-size="64" font-weight="800"
-        fill="#E94560">350</text>
-  <text x="246" y="280" text-anchor="start"
+        fill="#8C8C8C">38</text>
+  <text x="234" y="280" text-anchor="start"
         font-family="'Pretendard', sans-serif" font-size="18" font-weight="400"
-        fill="#E94560">회</text>
+        fill="#8C8C8C">회</text>
 
   <line x1="50" y1="305" x2="340" y2="305" stroke="#D6D0C8" stroke-width="1"/>
 
@@ -64,37 +64,37 @@
         font-size="13" fill="#555">전혈</text>
   <text x="340" y="330" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">150회</text>
+        fill="#333">14회</text>
   <rect x="50" y="338" width="280" height="10" rx="5" fill="#E8E2DA"/>
   <rect x="50" y="338" width="280" height="10" rx="5" fill="url(#bar-fill)"/>
   <text x="50" y="374" font-family="'Pretendard', sans-serif"
         font-size="13" fill="#555">혈장</text>
   <text x="340" y="374" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">70회</text>
+        fill="#333">13회</text>
   <rect x="50" y="382" width="280" height="10" rx="5" fill="#E8E2DA"/>
-  <rect x="50" y="382" width="130" height="10" rx="5" fill="url(#bar-fill)"/>
+  <rect x="50" y="382" width="260" height="10" rx="5" fill="url(#bar-fill)"/>
   <text x="50" y="418" font-family="'Pretendard', sans-serif"
         font-size="13" fill="#555">혈소판</text>
   <text x="340" y="418" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">80회</text>
+        fill="#333">0회</text>
   <rect x="50" y="426" width="280" height="10" rx="5" fill="#E8E2DA"/>
-  <rect x="50" y="426" width="149" height="10" rx="5" fill="url(#bar-fill)"/>
+  <rect x="50" y="426" width="0" height="10" rx="5" fill="url(#bar-fill)"/>
   <text x="50" y="462" font-family="'Pretendard', sans-serif"
         font-size="13" fill="#555">혈소판혈장</text>
   <text x="340" y="462" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">40회</text>
+        fill="#333">11회</text>
   <rect x="50" y="470" width="280" height="10" rx="5" fill="#E8E2DA"/>
-  <rect x="50" y="470" width="74" height="10" rx="5" fill="url(#bar-fill)"/>
+  <rect x="50" y="470" width="220" height="10" rx="5" fill="url(#bar-fill)"/>
   <text x="50" y="506" font-family="'Pretendard', sans-serif"
         font-size="13" fill="#555">기타</text>
   <text x="340" y="506" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">10회</text>
+        fill="#333">0회</text>
   <rect x="50" y="514" width="280" height="10" rx="5" fill="#E8E2DA"/>
-  <rect x="50" y="514" width="18" height="10" rx="5" fill="url(#bar-fill)"/>
+  <rect x="50" y="514" width="0" height="10" rx="5" fill="url(#bar-fill)"/>
 
   <line x1="50" y1="565" x2="340" y2="565" stroke="#D6D0C8" stroke-width="1"/>
   <text x="190" y="590" text-anchor="middle"
