@@ -206,7 +206,12 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg)
 
+    json_path = "output/blood-data.json"
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
     print(f"Card generated: {output_path}", file=sys.stderr)
+    print(f"Data saved: {json_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":
