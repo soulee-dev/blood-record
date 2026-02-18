@@ -53,7 +53,7 @@
         fill="#888">총 헌혈 횟수</text>
   <text x="190" y="280" text-anchor="middle"
         font-family="'Pretendard', sans-serif" font-size="64" font-weight="800"
-        fill="#8C8C8C">38</text>
+        fill="#8C8C8C">39</text>
   <text x="234" y="280" text-anchor="start"
         font-family="'Pretendard', sans-serif" font-size="18" font-weight="400"
         fill="#8C8C8C">회</text>
@@ -71,9 +71,9 @@
         font-size="13" fill="#555">혈장</text>
   <text x="340" y="374" text-anchor="end"
         font-family="'Pretendard', sans-serif" font-size="13" font-weight="700"
-        fill="#333">13회</text>
+        fill="#333">14회</text>
   <rect x="50" y="382" width="280" height="10" rx="5" fill="#E8E2DA"/>
-  <rect x="50" y="382" width="260" height="10" rx="5" fill="url(#bar-fill)"/>
+  <rect x="50" y="382" width="280" height="10" rx="5" fill="url(#bar-fill)"/>
   <text x="50" y="418" font-family="'Pretendard', sans-serif"
         font-size="13" fill="#555">혈소판</text>
   <text x="340" y="418" text-anchor="end"
@@ -99,5 +99,5 @@
   <line x1="50" y1="565" x2="340" y2="565" stroke="#D6D0C8" stroke-width="1"/>
   <text x="190" y="590" text-anchor="middle"
         font-family="'Pretendard', sans-serif" font-size="11"
-        fill="#AAA">2026.02.01 기준</text>
+        fill="#AAA">2026.02.18 기준</text>
 </svg>
